@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Stroke Readm90Day Calculator</title>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+		<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" >
+		
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+ 
+ 
+  <h2>Stroke Readmission Calculator</h2>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="pay1_private">PrivateInsurance:</label>
+      <input type="text" class="form-control" id="pay1_private" name="pay1_private" placeholder="Does the patient have private insurance? (y/n)">
+      <br>
+      <label for="metro">Metro:</label>
+      <input type="text" class="form-control" id="metro" name="metro" placeholder="Does the patient live in a metro area? (y/n)">
+      <br>
+      <label for="diabetes">Diabetes:</label>
+      <input type="text" class="form-control" id="diabetes" name="diabetes" placeholder="Is the patient diabetic? (y/n)">
+      <br>
+      <label for="copd">COPD:</label>
+      <input type="text" class="form-control" id="copd" name="copd" placeholder="Does the patient have COPD? (y/n)">
+      <br>
+      <label for="ckd">CKD:</label>
+      <input type="text" class="form-control" id="ckd" name="ckd" placeholder="Does the patient have CKD? (y/n)">
+      <br>
+      <label for="chf">CHF:</label>
+      <input type="text" class="form-control" id="chf" name="chf" placeholder="Does the patient have CHF? (y/n)">
+      <br>
+      <label for="atrial_fib">AFib:</label>
+      <input type="text" class="form-control" id="atrial_fib" name="atrial_fib" placeholder="Does the patient have AFib? (y/n)">	  
+      <br>
+      <label for="hyperlipidemia">Hyperlipidemia:</label>
+      <input type="text" class="form-control" id="hyperlipidemia" name="hyperlipidemia" placeholder="Does the patient have hyperlipidemia? (y/n)">	
+      <br>
+      <label for="sex">Sex:</label>
+      <input type="text" class="form-control" id="sex" name="sex" placeholder="Is the patient male or female? (m/f)">	
+      <br>
+      <label for="nicotine">Nicotine:</label>
+      <input type="text" class="form-control" id="nicotine" name="nicotine" placeholder="Is the patient a smoker? (y/n)">	
+      <br>
+      <label for="obesity">Obesity:</label>
+      <input type="text" class="form-control" id="obesity" name="obesity" placeholder="Is the patient obese? (y/n)">	
+      <br>
+      <label for="hypertension">Hypertension:</label>
+      <input type="text" class="form-control" id="hypertension" name="hypertension" placeholder="Is the patient hypertensive? (y/n)">	
+      <br>
+      <label for="age">Age:</label>
+      <input type="text" class="form-control" id="age" name="age" placeholder="Enter the patient's age."> 
+	
+ 
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+ 
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>
