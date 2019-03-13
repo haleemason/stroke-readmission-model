@@ -102,3 +102,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+src/final_stroke_dx1.csv
