@@ -1,23 +1,24 @@
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-#import googleapiclient.discovery
 from sklearn import preprocessing
-#from oauth2client.client import GoogleCredentials
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 import lime
 import lime.lime_tabular
+#import googleapiclient.discovery
+#from oauth2client.client import GoogleCredentials
 
-
+# Set the seed
 seed = 0
+
 
 def predict_proba(inputs_array, logits):
     """Given logits (i.e. unnormalized log probabilities), output the normalized 
        linear probabilities of the classes. (Note: Classes are ordered as they are 
        in active_features_ in sklearn.preprocessing.OneHotEncoder).
        For binary classification only.
-	
+
      Arguments:
      logits -- A dictionary of tensorflow logits return by Google ML Cloud Service. 
      E.g. [{'readm': [0.0969928503036499, 0.009187504649162292]}]
@@ -56,6 +57,7 @@ def format_2d_input(inputs):
         formatted_inputs.append({"input": each.tolist()})
     return formatted_inputs
 
+
 def predict_fn_neuralnet(inputs_array):
     """ An interface that make API call to gcloud ml-engine with a numpy array
         containing instances for which we want to return predictions.
@@ -82,7 +84,7 @@ def predict_fn_neuralnet(inputs_array):
     # Connect to our Prediction Model
     name = 'projects/{}/models/{}'.format(PROJECT_ID, MODEL_NAME)
     response = service.projects().predict(
-        name=name,
+        name = name,
         body={'instances': inputs_for_prediction}
     ).execute()
     
@@ -113,8 +115,9 @@ def one_hot_matrix(target_vector):
     onehotlabels = enc.transform(target_vector).toarray()
     return onehotlabels
 
+
 def oversample(X_train, Y_train, seed=None):
-    """oversample the positive class"""
+    """Oversample the positive class"""
     alldata = np.c_[X_train, Y_train]
     df = pd.DataFrame(alldata)
     positives = df[df.iloc[:, -1] == 1]
@@ -125,9 +128,10 @@ def oversample(X_train, Y_train, seed=None):
     Y_train = Y_train.reshape(Y_train.shape[0], 1)
     X_train = newdata.iloc[:, :-1].values
     return X_train, Y_train
-    
+
+
 def load_data(filename, colnames):
-    """preprocess data for a neural network"""
+    """Preprocess data for a neural network"""
     data = pd.read_csv(filename, usecols=colnames)
     data = data[colnames]
 
@@ -175,17 +179,17 @@ def load_data(filename, colnames):
     Y_scaled_valid = np.squeeze(Y_scaled_valid)
 
     return X_scaled_train, X_scaled_test, X_scaled_valid, Y_scaled_train, Y_scaled_test, Y_scaled_valid, X_scaler
-    
+
+
 def explain_prediction():
     """Loads and processes the data for lime"""
     
     features = ['readm90day', 'pay1_private', 'metro', 'diabetes', 'copd', 'ckd', 'chf', 'atrial_fib', 
                 'age', 'hyperlipidemia', 'sex', 'nicotine','obesity', 'hypertension']
     filename = "final_stroke_dx1.csv"
-    (   X_scaled_train, X_scaled_test, 
-         X_scaled_valid, Y_scaled_train, 
-         Y_scaled_test, Y_scaled_valid, X_scaler   
-    ) = load_data(filename, features)
+    (X_scaled_train, X_scaled_test,
+     X_scaled_valid, Y_scaled_train,
+     Y_scaled_test, Y_scaled_valid, X_scaler) = load_data(filename, features)
     
     categorical_columns = [0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12]
     feature_names_categorical = ['pay1_private', 'metro', 'diabetes', 'copd', 'ckd', 'chf', 'atrial_fib', 
@@ -194,13 +198,16 @@ def explain_prediction():
     feature_names_all = ['pay1_private', 'metro', 'diabetes', 'copd', 'ckd', 'chf', 'atrial_fib', 
                          'age', 'hyperlipidemia', 'sex', 'nicotine','obesity', 'hypertension']
     
-    #Create a function that return prediction probabilities
+    # Create a function that return prediction probabilities
     predictor = lambda x: predict_fn_neuralnet(x).astype(float)
     
-    #Create the LIME Explainer
-    explainer = lime.lime_tabular.LimeTabularExplainer(X_scaled_train ,feature_names = feature_names_all, class_names=[0,1],
-                                                   categorical_features=categorical_columns, 
-                                                   categorical_names=feature_names_categorical, kernel_width=3)
+    # Create the LIME Explainer
+    explainer = lime.lime_tabular.LimeTabularExplainer(X_scaled_train,
+                                                       feature_names=feature_names_all,
+                                                       class_names=[0, 1],
+                                                       categorical_features=categorical_columns,
+                                                       categorical_names=feature_names_categorical,
+                                                       kernel_width=3)
     return explainer, predictor, X_scaler
 
     
@@ -208,4 +215,3 @@ def scale_feature(feature, scaler):
     """Use a fitted scaler to rescale features"""
     feature = scaler.transform([feature])
     return feature.ravel()
-    
