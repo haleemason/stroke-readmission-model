@@ -82,7 +82,7 @@ def predict_fn_neuralnet(inputs_array):
     # Connect to our Prediction Model
     name = 'projects/{}/models/{}'.format(PROJECT_ID, MODEL_NAME)
     response = service.projects().predict(
-        name=name,
+        name = name,
         body={'instances': inputs_for_prediction}
     ).execute()
     
