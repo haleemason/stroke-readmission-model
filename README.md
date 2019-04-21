@@ -22,18 +22,18 @@ The app is live [here](https://capstoneproj.herokuapp.com/).
 
 Follow the text prompt in the fields and enter information correctly. For e.g., when the prompt asks you to enter "y/n", you could enter "`y`" or "`yes`", and it will consider it as "`yes`" that the patient has the condition. Entering "`n`" or "`no`" indicates that the patient does not have the condition. 
 
-A patient will have 13 input features. All are yes or no features except the 8th, with is the patients age. Example: `patient_1 = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 86, 0.0, 0.0, 0.0, 0.0, 1.0]` correspond to:
+A patient will have 13 input features. All are yes or no features except the 8th, with is the patients age. Example patient feature vector: `patient_1 = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 86, 0.0, 0.0, 0.0, 0.0, 1.0]` correspond to these inputs:
 
-1. pay1_private
-2. metro
-3. diabetes
-4. copd
-5. ckd
-6. chf
-7. atrial_fib
-8. age
-9. hyperlipidemia
-10. sex
-11. nicotine
-12. obesity
-13. hypertension
+1. `pay1_private` PrivateInsurance: Does the patient have private insurance? (y/n)
+2. `metro` Metro: Does the patient live in a metro area? (y/n)
+3. `diabetes` Diabetes: Is the patient diabetic? (y/n)
+4. `copd` COPD: Does the patient have COPD? (y/n)
+5. `ckd` CKD: Does the patient have CKD? (y/n)
+6. `chf` CHF: Does the patient have CHF? (y/n)
+7. `atrial_fib` AFib: Does the patient have AFib? (y/n)
+8. `age` Age: Enter the patient's age.
+9. `hyperlipidemia` Hyperlipidemia: Does the patient have hyperlipidemia? (y/n)
+10. `sex` Sex: Is the patient male or female? (m/f)
+11. `nicotine` Nicotine: Is the patient a smoker? (y/n)
+12. `obesity` Obesity: Is the patient obese? (y/n)
+13. `hypertension` Hypertension: Is the patient hypertensive? (y/n)
