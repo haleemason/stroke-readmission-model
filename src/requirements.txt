@@ -8,7 +8,7 @@ Jinja2==2.10.1
 lime==0.1.1.23
 Markdown==2.6.9
 MarkupSafe==1.0
-numpy==1.21.0
+numpy==1.22.0
 pandas==0.20.3
 protobuf==3.15.0
 python-dateutil==2.6.1
