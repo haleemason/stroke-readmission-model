@@ -18,6 +18,6 @@ scipy==0.19.1
 six==1.10.0
 tensorflow>=1.7.1
 tensorflow-tensorboard==0.1.6
-Werkzeug==0.15.5
+Werkzeug==2.2.3
 WTForms==2.1
 python-pdf==0.36
