@@ -4,7 +4,7 @@ Flask==2.3.2
 gunicorn==19.7.1
 html5lib==0.999999999
 itsdangerous==0.24
-Jinja2==2.10.1
+Jinja2==2.11.3
 lime==0.1.1.23
 Markdown==2.6.9
 MarkupSafe==1.0
