@@ -6,7 +6,7 @@ html5lib==0.999999999
 itsdangerous==0.24
 Jinja2==2.10.1
 lime==0.1.1.23
-Markdown==2.6.9
+Markdown==3.8.1
 MarkupSafe==1.0
 numpy==1.22.0
 pandas==0.20.3
